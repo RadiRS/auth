@@ -36,19 +36,19 @@ class Main extends Component {
   renderContent() {
     //check if user login
     switch (this.state.loggedIn) {
-      //user log in
+      //user log in show log out button
       case true:
         return (
           <CardSection>
-            <Button> Log Out </Button>
+            <Button onPress={() => firebase.auth().signOut()}>Log Out</Button>
           </CardSection>
         );
         break;
-      //if user not log in
+      //if user not log in show Login Form
       case false:
         return <LoginForm />;
         break;
-      //default
+      //default display spinner
       default:
         return (
           <CardSection>
