@@ -1,14 +1,14 @@
 //import all library needed
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import firebase from "firebase";
-import { Header } from "./common";
+import { Header, Button, CardSection, Spinner } from "./common";
 import LoginForm from "./LoginForm";
 
 //create component
 class Main extends Component {
   //create state for checking login or not
-  state = { loggedIn: false };
+  state = { loggedIn: null };
   //method life cycle
   componentWillMount() {
     //firebase web setup
@@ -30,12 +30,41 @@ class Main extends Component {
     });
   }
 
+  onButtonPress() {}
+
+  //renderConten
+  renderContent() {
+    //check if user login
+    switch (this.state.loggedIn) {
+      //user log in
+      case true:
+        return (
+          <CardSection>
+            <Button> Log Out </Button>
+          </CardSection>
+        );
+        break;
+      //if user not log in
+      case false:
+        return <LoginForm />;
+        break;
+      //default
+      default:
+        return (
+          <CardSection>
+            <Spinner size="large" />
+          </CardSection>
+        );
+        break;
+    }
+  }
+
   //display component in the screen
   render() {
     return (
       <View>
         <Header headerText="Authantication" />
-        <LoginForm />
+        {this.renderContent()}
       </View>
     );
   }
