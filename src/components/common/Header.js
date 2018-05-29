@@ -28,8 +28,7 @@ const styles = {
     position: "relative"
   },
   textStyle: {
-    fontSize: 20,
-    fontWeight: 'bold'
+    fontSize: 20
   }
 };
 
