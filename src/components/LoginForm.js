@@ -8,13 +8,19 @@ class LoginForm extends Component {
 
   onButtonPress() {
     const { email, password } = this.state;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .catch(() => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-        .catch(() => {
-            this.state.error({error: "Authentication Failed"});
-        });
-    });
+    this.setState({ error: "" });
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(() => {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+          .catch(() => {
+            this.setState({ error: "Authentication Failed" });
+          });
+      });
   }
 
   render() {
@@ -50,11 +56,11 @@ class LoginForm extends Component {
 }
 
 const styles = {
-    errorTextStyle: {
-        fontSize: 20,
-        textAlign: "center",
-        color: "red"
-    }
-}
+  errorTextStyle: {
+    fontSize: 20,
+    textAlign: "center",
+    color: "red"
+  }
+};
 
 export default LoginForm;
